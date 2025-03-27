@@ -1,10 +1,12 @@
-import React from "react";
-import { Box, Button, TextField } from "@mui/material";
-import { useNavigate } from "react-router";
-import { IUserSignUpData } from "@/entities/user/model";
-import { signupThunk } from "@/features/auth/lib/thunks";
-import { useAppDispatch } from "@/shared/lib/reduxHooks";
-import { loadAllBooksThunk, loadFavouriteBooksThunk, loadUserBooksThunk } from "@/features/bookSlice/thunk";
+import React from 'react';
+import { Box, Button, TextField } from '@mui/material';
+import { useNavigate } from 'react-router';
+import { IUserSignUpData } from '@/entities/user/model';
+import { signupThunk } from '@/features/auth/lib/thunks';
+import { useAppDispatch } from '@/shared/lib/reduxHooks';
+import {
+  loadAllQuestionsThunk
+} from '@/features/questionSlice/thunk';
 
 export default function SignUpForm(): React.JSX.Element {
   const navigate = useNavigate();
@@ -13,16 +15,14 @@ export default function SignUpForm(): React.JSX.Element {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const data: IUserSignUpData = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
     };
-    void dispatch(signupThunk(data)).then(()=>{
-      dispatch(loadAllBooksThunk())
-      dispatch(loadUserBooksThunk());
-      dispatch(loadFavouriteBooksThunk());
-      navigate("/");
-    })
+    void dispatch(signupThunk(data)).then(() => {
+    dispatch(loadAllQuestionsThunk())
+      navigate('/');
+    });
   };
   return (
     <Box
@@ -38,12 +38,7 @@ export default function SignUpForm(): React.JSX.Element {
       <br />
       <TextField variant="outlined" name="email" label="Email" type="email" />
       <br />
-      <TextField
-        variant="outlined"
-        name="password"
-        label="Password"
-        type="password"
-      />
+      <TextField variant="outlined" name="password" label="Password" type="password" />
       <br />
       <Button variant="outlined" type="submit">
         Sign Up
