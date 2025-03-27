@@ -3,49 +3,30 @@ import BookCard from "@/entities/book/ui/ProductCard/BookCard";
 import { changeSort } from "@/features/bookSlice/slice";
 import {  useAppDispatch, useAppSelector } from "@/shared/lib/reduxHooks";
 import { Box, Button, ButtonGroup, Paper } from "@mui/material";
+import "./mainPageStyle.css";
+import { useNavigate } from "react-router-dom";
 
 
 export function MainPage(): React.JSX.Element {
-
+const navigate = useNavigate();
 const books = useAppSelector((state) => state.books.books);
   const { key, order } = useAppSelector((store) => store.books.sort);
   const dispatch = useAppDispatch();
 
   return (
-    <Paper elevation={0}>
-         <ButtonGroup>
-            <Button
-              onClick={() => {
-                dispatch(changeSort('order'));
-              }}
-              variant={key === 'order' ? 'secondary' : 'outline-secondary'}
-            >
-              По порядку добавления {key === 'order' && (order === 'asc' ? '1-9' : '9-1')}
-            </Button>
-            <Button
-              onClick={() => {
-                dispatch(changeSort('name'));
-              }}
-              variant={key === 'name' ? 'secondary' : 'outline-secondary'}
-            >
-              По названию {key === 'name' && (order === 'asc' ? 'А-Я' : 'Я-А')}
-            </Button>
-          </ButtonGroup>
-      <Box
-        mt={1}
-        py={2}
-        px={2}
-        display="flex"
-        flexDirection="row"
-        flexWrap="wrap"
-      >
-        {books.map((el) => (
-          <Box p={1} key={el.id}>
-            <BookCard book={el} 
-            />
-          </Box>
-        ))}
-      </Box>
-    </Paper>
+    <div className="welcome-page">
+      <h1>СВОЯ ИГРА</h1>
+      <h3>Прежде чем начать игру, ознакомься с правилами:</h3>
+      <ol>
+        <li>Игра начнётся после нажатия на кнопку "Начать игру"</li>
+        <li>Вы можете выбрать любой вопрос из любой категории</li>
+        <li>У каждого вопроса своя стоимость</li>
+        <li>У вас будет 60 секунд для того чтобы ответить на вопрос</li>
+        <li>Если ответ верный, ты получаешь баллы эквивалентные стоимости вопроса</li>
+        <li>Если ответ неправильный, ты теряешь баллы эквивалентные стоимости вопроса</li>
+        <li>Если время закончилось, ты теряешь баллы эквивалентные стоимости вопроса</li>
+      </ol>
+      <Button onClick={() => navigate("/game")} className="start-button" variant="contained" color="primary">Начать игру</Button>
+    </div>
   );
 }

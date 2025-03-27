@@ -1,0 +1,12 @@
+* {
+    color: white;
+    
+}
+
+body {
+    background-image: url(../../public/background_image.jpg);
+    background-repeat: no-repeat;  /* Отключить повторение */
+    background-size: cover;       /* Растянуть на весь экран */
+    background-color: transparent; /* Убрать цвет фона */
+    
+}
