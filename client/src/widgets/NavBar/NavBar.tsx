@@ -48,11 +48,14 @@ export default function NavBar(): React.JSX.Element {
               Main
             </NavLink>
             {user && (<>
-            <NavLink to={CLIENT_ROUTES.BOOKS} style={styles.navLink}>
-              Books
+            <NavLink to={CLIENT_ROUTES.GAME} style={styles.navLink}>
+              Game
             </NavLink>
-            <NavLink to={CLIENT_ROUTES.ADDBOOK} style={styles.navLink}>
-              AddBook
+            <NavLink to={CLIENT_ROUTES.LK} style={styles.navLink}>
+              LK
+            </NavLink>
+            <NavLink to={CLIENT_ROUTES.STATS} style={styles.navLink}>
+              Stats
             </NavLink>
             </>)}
             {!user && (

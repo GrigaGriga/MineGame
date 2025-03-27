@@ -24,7 +24,6 @@ export default function Layout(): React.JSX.Element {
       <Container>
         <NavBar />
         <Outlet />
-        <Footer />
       </Container>
     </>
   );

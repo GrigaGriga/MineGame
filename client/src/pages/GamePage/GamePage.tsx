@@ -79,28 +79,29 @@ export function GamePage(): React.JSX.Element {
   aria-describedby="modal-modal-description"
 >
   <Box sx={style}>
-    <Typography id="modal-modal-title" variant="h6" component="h2">
+    <Typography style={{color:'black'}} id="modal-modal-title" variant="h6" component="h2">
       {selectedQuestion?.question}
     </Typography>
-    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-      <p>{selectedQuestion?.point}</p>
-    <p>Время-{timer}</p>
+    <Typography 
+    id="modal-modal-description" sx={{ mt: 2 }}>
+      <p style={{color:'black'}}>{selectedQuestion?.point}</p>
+    <p style={{color:'black'}}>Время-{timer}</p>
     </Typography>
     <TextField id="outlined-basic" label="Outlined" variant="outlined" />
     <Button onClick={handleClose} variant="outlined">Outlined</Button>
   </Box>
 </Modal>
 
-    <TableContainer component={Paper}>
+    <TableContainer style={{color:'white',backgroundColor: 'rgba(0, 0, 0, 0.699',marginTop:'50px'}} component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableBody>
           {themes.map((theme) => (
             <TableRow key={theme.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component="th" scope="row">
+              <TableCell style={{color:'white'}} component="th" scope="row">
                 {theme.title}
-              </TableCell>
+              </TableCell >
               {theme.Questions.toSorted((a, b) => a.point - b.point).map((question) => (
-                <TableCell align="right">
+                <TableCell  align="right">
                   <Button onClick={()=>handleOpen(question)}>{question.point}</Button>
                 </TableCell>
               ))}

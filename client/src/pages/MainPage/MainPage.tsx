@@ -10,11 +10,11 @@ import { useNavigate } from "react-router-dom";
 
 export function MainPage(): React.JSX.Element {
 const navigate = useNavigate();
-const books = useAppSelector((state) => state.books.books);
+// const books = useAppSelector((state) => state.books.books);
 
 
-  const { key, order } = useAppSelector((store) => store.books.sort);
-  const dispatch = useAppDispatch();
+  // const { key, order } = useAppSelector((store) => store.books.sort);
+  // const dispatch = useAppDispatch();
 
   return (
     
