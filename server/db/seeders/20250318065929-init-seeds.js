@@ -22,57 +22,61 @@ module.exports = {
       {},
     );
     await queryInterface.bulkInsert(
-      'Books',
+      'Stats',
       [
         {
-          title: 'Book1',
-          description: 'Book1Book1',
-          link: 'https://avatars.mds.yandex.net/i?id=37c03c866b6673cac081fe21add461993aadd88f-5218274-images-thumbs&n=13',
           userId: 1,
-          fileName: 'Book1.txt',
-        },
-        {
-          title: 'Book2',
-          description: 'Book2Book2',
-          link: 'https://avatars.mds.yandex.net/i?id=cc1dd7c2c6a8657bb1048ee3435e053697d6bdc9-11444350-images-thumbs&n=13',
-          userId: 2,
-          fileName: 'Book2.txt',
+          points: 1111,
         },
       ],
       {},
     );
     await queryInterface.bulkInsert(
-      'Likes',
+      'Themes',
       [
         {
-          userId: 1,
-          bookId: 1,
+          title: 'First theme',
         },
+        {
+          title: 'Second theme',
+        },
+        {
+          title: 'Third theme',}
       ],
       {},
     );
     await queryInterface.bulkInsert(
-      'Comments',
+      'Questions',
       [
         {
-          text: 'Cool',
-          authorId: 1,
-          bookId: 1,
+          question: 'Is it cool?',
+          answer: 'Yes',
+          point: 100,
+          themeId: 1,
         },
         {
-          text: 'Not cool',
-          authorId: 2,
-          bookId: 2,
+          question: 'Is it cool?',
+          answer: 'Yes',
+          point: 100,
+          themeId: 1,
         },
-      ],
-      {},
-    );
-    await queryInterface.bulkInsert(
-      'Reads',
-      [
         {
-          userId: 1,
-          bookId: 2,
+          question: 'Is it cool?',
+          answer: 'Yes',
+          point: 100,
+          themeId: 1,
+        },
+        {
+          question: 'Is it cool?',
+          answer: 'Yes',
+          point: 100,
+          themeId: 2,
+        },
+        {
+          question: 'Is it cool?',
+          answer: 'Yes',
+          point: 100,
+          themeId: 3,
         },
       ],
       {},

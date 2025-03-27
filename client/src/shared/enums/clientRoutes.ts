@@ -1,6 +1,6 @@
 export enum CLIENT_ROUTES {
   MAIN = "/",
-  BOOKS = "/books",
+  GAME = "/game",
   ADDBOOK = "/addbook",
   LOGIN = "/login",
   SIGN_UP = "/signup",
