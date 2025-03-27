@@ -3,10 +3,20 @@ const QuestionsService = require('../services/QuestionsServices');
 // const path = require('path');
 
 class QuestionsController {
-  static async getAll(req, res) {
+  static async getAllQuestions(req, res) {
     try {
-      const books = await QuestionsService.getAllQuestions();
-      res.json(books);
+      const questions = await QuestionsService.getAllQuestions();
+      res.json(questions);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Ошибка сервера' });
+    }
+  }
+
+  static async getAllThemes(req, res) {
+    try {
+      const themes = await QuestionsService.getAllThemes();
+      res.json(themes);
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: 'Ошибка сервера' });

@@ -1,9 +1,5 @@
 import { refreshThunk } from '@/features/auth/lib/thunks';
-import {
-  loadAllBooksThunk,
-  loadFavouriteBooksThunk,
-  loadUserBooksThunk,
-} from '@/features/bookSlice/thunk';
+import {  loadAllQuestionsThunk, loadAllThemesThunk} from '@/features/questionSlice/thunk';
 import { useAppDispatch } from '@/shared/lib/reduxHooks';
 import Footer from '@/widgets/Footer.tsx/Footer';
 import NavBar from '@/widgets/NavBar/NavBar';
@@ -19,9 +15,8 @@ export default function Layout(): React.JSX.Element {
   }, []);
 
   useEffect(() => {
-    dispatch(loadAllBooksThunk());
-    dispatch(loadUserBooksThunk());
-    dispatch(loadFavouriteBooksThunk());
+    dispatch(loadAllQuestionsThunk());
+    dispatch(loadAllThemesThunk());
   }, []);
 
   return (

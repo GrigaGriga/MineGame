@@ -4,7 +4,8 @@ const { verifyAccessToken } = require('../middlewares/verifyTokens');
 const QuestionsController = require('../controllers/QuestionsController');
 // const upload = require('../middlewares/multer');
 
-questionsRouter.route('/').get(QuestionsController.getAll)
+questionsRouter.route('/questions').get(QuestionsController.getAllQuestions)
+questionsRouter.route('/themes').get(QuestionsController.getAllThemes)
 // booksRouter.route('/:id/book').get(checkId, BooksController.getOne)
 // booksRouter.route('/:id/book/comment').post(checkId, verifyAccessToken, BooksController.commentBook)
 // booksRouter.route('/addbook').post(verifyAccessToken, upload.single('file'), BooksController.createBook);

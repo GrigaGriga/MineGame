@@ -1,3 +1,4 @@
+
 import React from "react";
 import BookCard from "@/entities/book/ui/ProductCard/BookCard";
 import { changeSort } from "@/features/bookSlice/slice";
@@ -10,10 +11,13 @@ import { useNavigate } from "react-router-dom";
 export function MainPage(): React.JSX.Element {
 const navigate = useNavigate();
 const books = useAppSelector((state) => state.books.books);
+
+
   const { key, order } = useAppSelector((store) => store.books.sort);
   const dispatch = useAppDispatch();
 
   return (
+    
     <div className="welcome-page">
       <h1>СВОЯ ИГРА</h1>
       <h3>Прежде чем начать игру, ознакомься с правилами:</h3>
@@ -28,5 +32,6 @@ const books = useAppSelector((state) => state.books.books);
       </ol>
       <Button onClick={() => navigate("/game")} className="start-button" variant="contained" color="primary">Начать игру</Button>
     </div>
+
   );
 }
