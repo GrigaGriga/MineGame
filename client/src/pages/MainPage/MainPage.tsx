@@ -21,6 +21,7 @@ const navigate = useNavigate();
     <div className="welcome-page">
       <h1>СВОЯ ИГРА</h1>
       <h3>Прежде чем начать игру, ознакомься с правилами:</h3>
+      <button onClick={() => navigate("/game")} className="start-button" >Начать игру</button>
       <ol>
         <li>Игра начнётся после нажатия на кнопку "Начать игру"</li>
         <li>Вы можете выбрать любой вопрос из любой категории</li>
@@ -30,7 +31,7 @@ const navigate = useNavigate();
         <li>Если ответ неправильный, ты теряешь баллы эквивалентные стоимости вопроса</li>
         <li>Если время закончилось, ты теряешь баллы эквивалентные стоимости вопроса</li>
       </ol>
-      <Button onClick={() => navigate("/game")} className="start-button" variant="contained" color="primary">Начать игру</Button>
+      
     </div>
 
   );
