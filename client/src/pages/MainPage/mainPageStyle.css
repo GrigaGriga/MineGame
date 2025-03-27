@@ -1,0 +1,19 @@
+.welcome-page {
+    font-size: 36px;
+    text-shadow: rgb(0, 255, 255) 1px 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.699);
+    
+}
+
+.start-button {
+    margin-bottom: 10px;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: rgb(0, 255, 255) 1px 0 10px;
+    
+}
