@@ -3,9 +3,9 @@ import { useAppSelector } from "@/shared/lib/reduxHooks";
 import { Box, Paper } from "@mui/material";
 import React from "react";
 
-export function BooksPage(): React.JSX.Element {
+export function GamePage(): React.JSX.Element {
 
-  const books = useAppSelector((state) => state.books.likedUsersBooks);
+  // const questions = useAppSelector((state) => state.books.likedUsersBooks);
 
   return (
     <Paper elevation={0}>
@@ -16,13 +16,13 @@ export function BooksPage(): React.JSX.Element {
         display="flex"
         flexDirection="row"
         flexWrap="wrap"
-      >
-        {books.map((el) => (
+      >123
+        {/* {questions.map((el) => (
           <Box p={1} key={el.id}>
             <BookCard book={el} 
             />
           </Box>
-        ))}
+        ))} */}
       </Box>
     </Paper>
   );
