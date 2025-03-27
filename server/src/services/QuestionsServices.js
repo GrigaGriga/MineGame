@@ -11,6 +11,14 @@ class QuestionsService {
     });
   }
 
+  static getAllThemes() {
+    return Theme.findAll({
+      include: [{
+        model: Question,
+      },]
+    });
+  }
+
   // static getOneBook(id) {
   //   return Book.findByPk(id, {
   //     include: [{

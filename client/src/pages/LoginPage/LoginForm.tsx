@@ -4,10 +4,8 @@ import type { IUserLoginData } from '@/entities/user/model';
 import { useNavigate } from 'react-router';
 import { useAppDispatch } from '@/shared/lib/reduxHooks';
 import {
-  loadAllBooksThunk,
-  loadFavouriteBooksThunk,
-  loadUserBooksThunk,
-} from '../../features/bookSlice/thunk';
+  loadAllQuestionsThunk
+} from '../../features/questionSlice/thunk';
 import { loginThunk } from '@/features/auth/lib/thunks';
 
 export default function LoginForm(): React.JSX.Element {
@@ -20,13 +18,11 @@ export default function LoginForm(): React.JSX.Element {
       email: formData.get('email') as string,
       password: formData.get('password') as string,
     };
-    dispatch(loginThunk(data)).then(()=>{
-      dispatch(loadAllBooksThunk());
-      dispatch(loadUserBooksThunk());
-      dispatch(loadFavouriteBooksThunk());
-      navigate('/');
-    })
+    dispatch(loginThunk(data)).then(() => {
+          dispatch(loadAllQuestionsThunk())
 
+      navigate('/');
+    });
   };
   return (
     <Box
