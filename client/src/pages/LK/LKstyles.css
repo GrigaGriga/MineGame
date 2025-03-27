@@ -1,0 +1,102 @@
+/* Основные стили */
+.lk-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #0efcf0, #262494, #0dffa2);
+    min-height: 100vh;
+  }
+  
+  .lk-header h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    color: #00ebfc;
+  }
+  
+  /* Профиль пользователя */
+  .lk-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  
+  .avatar-frame {
+    width: 200px;
+    height: 200px;
+    border: 5px solid #00e1ff;
+    border-radius: 50%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    margin-bottom: 20px;
+  }
+  
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .username {
+    font-size: 2rem;
+    color: #00e1ff;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Таблица игр */
+  .lk-games {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .lk-games h3 {
+    font-size: 1.5rem;
+    color: #00fff2;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .games-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .games-table th, .games-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #00c3ff;
+  }
+  
+  .games-table th {
+    background-color: rgba(255, 215, 0, 0.2);
+    font-size: 1.2rem;
+  }
+  
+  .games-table tr:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .lk-container {
+      padding: 10px;
+    }
+    
+    .avatar-frame {
+      width: 150px;
+      height: 150px;
+    }
+    
+    .games-table th, .games-table td {
+      padding: 8px;
+    }
+  }

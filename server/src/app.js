@@ -7,6 +7,7 @@ const authRouter = require('./routers/authRouter');
 const corsConfig = require('./configs/cors.config');
 const tokensRouter = require('./routers/tokensRouter');
 const questionsRouter = require('./routers/questionsRouter');
+const statsRouter = require('./routers/statsRouter');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(cors(corsConfig));
 app.use('/api/auth/', authRouter);
 app.use('/api/tokens/', tokensRouter);
 app.use('/api/questions/', questionsRouter);
+app.use('/api/stats/', statsRouter);
 
 
 module.exports = app;
