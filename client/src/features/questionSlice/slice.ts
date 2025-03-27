@@ -16,6 +16,7 @@ import {
 export type QuestionState = {
   questions: IQuestion[];
   themes: IQuestion[];
+  score: number;
   // sort: {
   //   key: 'order' | 'name';
   //   order: 'asc' | 'desc';
@@ -26,6 +27,7 @@ export type QuestionState = {
 const initialState: QuestionState = {
   questions: [],
   themes:[],
+  score: 0,
   // sort: {
   //   key: 'order',
   //   order: 'asc',
@@ -50,6 +52,37 @@ export const questionSlice = createSlice({
   name: 'questions',
   initialState,
   reducers: {
+    incrementScore: (state, action) => {
+  state.score = state.score + action.payload.point
+  // console.log(state.score)
+  // let theme = state.themes.find((theme) => theme.id === action.payload.themeId)
+  // let question = theme?.questions.find((question) => question.id === action.payload.id)
+  // if (question) {
+  //   question.isSolved = true
+  // }
+  // question = question.map((el) => 
+  //   el.id === action.payload.id ? question : el)
+  // state.themes = state.themes.map((el) => 
+  //   el.id === theme.id ? theme : el)
+},
+decrementScore: (state, action: PayloadAction<number>) => {
+  // console.log(state)
+  state.score = state.score - action.payload.point
+  // console.log(action.payload.themeId)
+  // let theme = state.themes.find((el) => el.id === action.payload.themeId)
+  // console.log(theme)
+  // let question = theme?.Questions.find((question) => question.id === action.payload.id)
+  // if (question) {
+  //   question.isSolved = true
+  }
+  // console.log(question)
+  // console.log(theme)
+  // theme = theme?.Question.map((el) => 
+  //   el.id === action.payload.id ? question : el)
+  // state.themes = state.themes.map((el) => 
+  //   el.id === theme.id ? theme : el)
+// }
+
     // changeSort: (state, action: PayloadAction<'order' | 'name'>) => {
     //   if (state.sort.key === action.payload) {
     //     state.sort.order = state.sort.order === 'asc' ? 'desc' : 'asc';
@@ -164,6 +197,6 @@ export const questionSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-// export const { changeSort } = bookSlice.actions;
+export const { incrementScore, decrementScore} = questionSlice.actions;
 
 export default questionSlice.reducer;
