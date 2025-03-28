@@ -1,28 +1,20 @@
-
 import React from "react";
-import BookCard from "@/entities/book/ui/ProductCard/BookCard";
-import { changeSort } from "@/features/bookSlice/slice";
-import {  useAppDispatch, useAppSelector } from "@/shared/lib/reduxHooks";
-import { Box, Button, ButtonGroup, Paper } from "@mui/material";
 import "./mainPageStyle.css";
 import { useNavigate } from "react-router-dom";
-
-
+import { useAppSelector } from "@/shared/lib/reduxHooks";
+import { CLIENT_ROUTES } from "@/shared/enums/clientRoutes";
+import { AuthStatus } from "@/entities/user/model";
 
 export function MainPage(): React.JSX.Element {
+  const status = useAppSelector((state) => state.auth.status);
 const navigate = useNavigate();
-// const books = useAppSelector((state) => state.books.books);
-
-
-
-  // const { key, order } = useAppSelector((store) => store.books.sort);
-  // const dispatch = useAppDispatch();
 
   return (
     <div className="welcome-page">
       <h1>СВОЯ ИГРА</h1>
       <h3>Прежде чем начать игру, ознакомься с правилами:</h3>
-      <button onClick={() => navigate("/game")} className="start-button" >Начать игру</button>
+      {status === AuthStatus.AUTHORIZED ? <button onClick={() => navigate(CLIENT_ROUTES.GAME)} className="start-button" >Начать игру</button> : <button onClick={() => navigate(CLIENT_ROUTES.LOGIN)} className="start-button" >Войти</button>}
+      
       <ol>
         <li>Игра начнётся после нажатия на кнопку "Начать игру"</li>
         <li>Вы можете выбрать любой вопрос из любой категории</li>
