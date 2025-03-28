@@ -7,6 +7,10 @@ class StatService {
     return Stat.findAll();
   }
 
+  static async getAllStats() {
+    return await Stat.findAll();
+}
+
   static getAllUserGames(userId) {
     return Stat.findAll({
       where: {

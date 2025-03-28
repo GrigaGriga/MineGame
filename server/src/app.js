@@ -21,9 +21,6 @@ app.use(cors(corsConfig));
 app.use('/api/auth/', authRouter);
 app.use('/api/tokens/', tokensRouter);
 app.use('/api/questions/', questionsRouter);
-
-app.use('/api/stat/', statsRouter);
-
 app.use('/api/stats/', statsRouter);
 
 

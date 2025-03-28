@@ -2,8 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import { useAppDispatch } from '@/shared/lib/reduxHooks';
 import type { IUserLoginData } from '@/entities/user/model';
-import './LoginForm.css';
-
+import './LoginFormStyles.css';
 import { loginThunk } from '@/features/auth/lib/thunks';
 import { loadAllThemesThunk } from '@/features/questionSlice/thunk';
 
