@@ -75,55 +75,116 @@ h1 {
 h3 {
 margin-top: -10px;
 }
-
+/* start-button---------------------------------------------------*/
 .start-button {
-    background: rgba(0, 225, 255, 0.089);
-    border: none;
-    color: white;
-    padding: 0.5rem 1.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 2rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    width: 230px;
-    height: 60px;
-    margin-bottom: 10px;
-  }
+  background: rgba(0, 225, 255, 0.1);
+  border: 1px solid rgba(0, 225, 255, 0.3);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 2rem;
+  position: relative;
+  overflow: hidden;
+  width: 230px;
+  height: 60px;
+  margin-bottom: 10px;
+  z-index: 1;
   
-  .start-button::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-      transparent,
-      transparent,
-      transparent,
-      #00e1ff
-    );
-    animation: rotate 4s linear infinite;
-    z-index: -1;
+  /* Неоновое свечение в покое */
+  box-shadow: 
+    0 0 5px rgba(0, 225, 255, 0.5),
+    0 0 10px rgba(0, 225, 255, 0.3),
+    inset 0 0 5px rgba(0, 225, 255, 0.2);
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+/* Основная анимация пульсации */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px rgba(0, 225, 255, 0.5),
+      0 0 10px rgba(0, 225, 255, 0.3),
+      inset 0 0 5px rgba(0, 225, 255, 0.2);
   }
-  
-  .start-button:hover {
-    color: #00e1ff;
-    box-shadow: 0 0 15px rgba(0, 225, 255, 0.61);
+  50% {
+    box-shadow: 
+      0 0 15px rgba(0, 225, 255, 0.7),
+      0 0 25px rgba(0, 225, 255, 0.4),
+      inset 0 0 10px rgba(0, 225, 255, 0.3);
   }
-  
-  .start-button::after {
-    content: '';
-    position: absolute;
-    inset: 1px;
-    background: rgba(20, 20, 30, 0.9);
-    border-radius: 3px;
-    z-index: -1;
-  }
-  
-  @keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+}
+
+/* Вращающийся неоновый контур */
+.start-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 250%;
+  height: 650%;
+  background: conic-gradient(
+    transparent,
+    transparent,
+    transparent,
+    #00e1ff,
+    transparent,
+    transparent,
+    transparent,
+    #00e1ff
+  );
+  animation: rotate 3.5s linear infinite;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+/* Внутренний слой */
+.start-button::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: rgba(15, 15, 25, 0.9);
+  border-radius: 3px;
+  z-index: -1;
+}
+
+/* Эффекты при наведении */
+.start-button:hover {
+  color: #00e1ff;
+  text-shadow: 0 0 10px rgba(0, 225, 255, 0.7);
+  animation: none;
+  box-shadow: 
+    0 0 20px rgba(0, 225, 255, 0.8),
+    0 0 40px rgba(0, 225, 255, 0.4),
+    inset 0 0 15px rgba(0, 225, 255, 0.3);
+}
+
+.start-button:hover::before {
+  animation: rotate 1.5s linear infinite;
+  opacity: 0.9;
+  background: conic-gradient(
+    transparent,
+    #00e1ff,
+    transparent,
+    #00e1ff,
+    transparent,
+    #00e1ff
+  );
+}
+
+/* Анимация вращения */
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Дополнительная анимация текста при наведении */
+.start-button:hover span {
+  display: inline-block;
+  animation: textPulse 0.5s ease infinite alternate;
+}
+
+@keyframes textPulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
