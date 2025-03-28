@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router';
 import { IUserSignUpData } from '@/entities/user/model';
 import { signupThunk } from '@/features/auth/lib/thunks';
 import { useAppDispatch } from '@/shared/lib/reduxHooks';
-import {
-  loadAllQuestionsThunk
-} from '@/features/questionSlice/thunk';
+import { loadAllThemesThunk } from '@/features/questionSlice/thunk';
 
 export default function SignUpForm(): React.JSX.Element {
   const navigate = useNavigate();
@@ -20,7 +18,7 @@ export default function SignUpForm(): React.JSX.Element {
       password: formData.get('password') as string,
     };
     void dispatch(signupThunk(data)).then(() => {
-    dispatch(loadAllQuestionsThunk())
+      dispatch(loadAllThemesThunk());
       navigate('/');
     });
   };

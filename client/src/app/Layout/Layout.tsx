@@ -1,5 +1,5 @@
 import { refreshThunk } from '@/features/auth/lib/thunks';
-import {  loadAllQuestionsThunk, loadAllThemesThunk} from '@/features/questionSlice/thunk';
+import {   loadAllThemesThunk} from '@/features/questionSlice/thunk';
 import { useAppDispatch } from '@/shared/lib/reduxHooks';
 import NavBar from '@/widgets/NavBar/NavBar';
 import { Container } from '@mui/material';
@@ -14,7 +14,6 @@ export default function Layout(): React.JSX.Element {
   }, []);
 
   useEffect(() => {
-    dispatch(loadAllQuestionsThunk());
     dispatch(loadAllThemesThunk());
   }, []);
 

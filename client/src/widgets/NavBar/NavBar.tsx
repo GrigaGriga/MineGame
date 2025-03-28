@@ -10,6 +10,7 @@ export default function NavBar(): React.JSX.Element {
   const status = useAppSelector((store) => store.auth.status);
   const user = useAppSelector((store) => store.auth.user);
   const dispatch = useAppDispatch();
+  // console.log(user)
 
   const logoutHandler = async (): Promise<void> => {
     dispatch(logoutThunk());
