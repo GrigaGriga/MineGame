@@ -67,7 +67,7 @@ export function GamePage(): React.JSX.Element {
       setTimeout(() => {
         setShow(null);
         handleClose();
-      }, 2000);
+      }, 1500);
     } else {
       dispatch(decrementScore(question));
       // console.log(question)
@@ -76,7 +76,7 @@ export function GamePage(): React.JSX.Element {
       setTimeout(() => {
         setShow(null);
         handleClose();
-      }, 2000);
+      }, 3000);
     }
   };
   useEffect(() => {
@@ -111,6 +111,7 @@ export function GamePage(): React.JSX.Element {
     const allQuestionsSolved = themes.every((theme) =>
       theme.Questions.every((question) => question.isSolved),
     );
+    dispatch(addStatOfUserThunk(score))
     if (themes.length > 0 && allQuestionsSolved) {
       dispatch(addStatOfUserThunk(score)).then(() => {
         console.log('Конец игры');
@@ -151,7 +152,7 @@ export function GamePage(): React.JSX.Element {
             </Button>
             <Typography style={{ color: 'black' }} id="modal-modal-description" sx={{ mt: 2 }}>
               {show === 'show' && 'ВЕРНО!'}
-              {show === 'noShow' && 'МИМО!'}
+              {show === 'noShow' && `МИМО! Верный ответ: ${selectedQuestion?.answer}`}
             </Typography>
           </Box>
         </Box>
