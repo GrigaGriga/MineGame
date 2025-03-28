@@ -35,7 +35,7 @@ export default function StatsPage(): React.JSX.Element {
         <img src="./kybok.png" alt="Champion Trophy" className="trophy-image" />
         <div className="trophy-glow"></div>
       </div>
-      <button className="download-button" onClick={handleDownload}>Скачать статустику</button>
+      <button className="download-button" onClick={handleDownload}>Скачать статистику</button>
       <div className="stats-scroll-container">
         <table className="stats-table">
           <thead>

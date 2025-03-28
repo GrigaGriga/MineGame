@@ -28,7 +28,10 @@ export function GamePage(): React.JSX.Element {
   const score = useAppSelector((state) => state.questions.score);
   const dispatch = useAppDispatch();
 
+
+  const [num, setNum] = useState(0);
   const [open, setOpen] = useState(false);
+  const [openEnd, setOpenEnd] = useState(false);
   const [show, setShow] = useState(null);
   const [timer, setTimer] = useState(60);
   const [selectedQuestion, setSelectedQuestion] = useState<IQuestion | null>(null);
@@ -49,8 +52,15 @@ export function GamePage(): React.JSX.Element {
       setIntervalId(null);
     }
   };
+  const handleOpenEnd = (): void => {
+    console.log('handleOpenEnd');
+    setOpenEnd(true);
+  };
+  const handleCloseEnd = (): void => {
+    setOpenEnd(false);
+  };
 
-  const handleAnswerChange = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleAnswerChange = (event: React.FormEvent<HTMLFormElement>):void => {
     setAnswer(event.target.value);
   };
 
@@ -111,18 +121,37 @@ export function GamePage(): React.JSX.Element {
     const allQuestionsSolved = themes.every((theme) =>
       theme.Questions.every((question) => question.isSolved),
     );
-    dispatch(addStatOfUserThunk(score))
     if (themes.length > 0 && allQuestionsSolved) {
       dispatch(addStatOfUserThunk(score)).then(() => {
         console.log('Конец игры');
         dispatch(loadAllThemesThunk());
+        setNum(score);
         dispatch(resetScore());
+        handleOpenEnd();
       });
     }
   }, [themes]);
 
   return (
     <>
+          <Modal
+        open={openEnd}
+        onClose={handleCloseEnd}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography style={{ color: 'black' }} id="modal-modal-title" variant="h6" component="h2">
+            Конец Игры
+          </Typography>
+          <Typography style={{ color: 'black' }} id="modal-modal-description" sx={{ mt: 2 }}>
+            Итоговый счет: {num}
+          </Typography>
+            <Button variant="outlined" onClick={handleCloseEnd}>
+              УРА
+            </Button>
+        </Box>
+      </Modal>
       <Modal
         open={open}
         // onClose={handleClose}
@@ -145,7 +174,7 @@ export function GamePage(): React.JSX.Element {
               id="outlined-basic"
               variant="outlined"
               value={answer}
-              onChange={handleAnswerChange}
+              // onChange={handleAnswerChange}
             />
             <Button variant="outlined" type="submit">
               Ответить
@@ -185,6 +214,7 @@ export function GamePage(): React.JSX.Element {
                           cursor: 'default',
                         }),
                       }}
+                      // onClick={handleOpenEnd}
                       onClick={() => handleOpen(question)}
                     >
                       {question.point}

@@ -54,7 +54,7 @@ class StatsController {
       const newData = [[user.name, stat.points]]
       let workbook
       let worksheet
-      console.log(filePath)
+      // console.log(filePath)
       try {
         workbook = XLSX.readFile(filePath);
         const sheetName = workbook.SheetNames[0];
