@@ -1,27 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/reduxHooks';
-import { Box, Button, Modal, TextField, Typography } from '@mui/material';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { IQuestion } from '@/entities/question/model';
 import { decrementScore, incrementScore, resetScore } from '@/features/questionSlice/slice';
 import { addStatOfUserThunk, loadAllThemesThunk } from '@/features/questionSlice/thunk';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import './GamePageStyles.css';
 
 export function GamePage(): React.JSX.Element {
   const themes = useAppSelector((state) => state.questions.themes);
@@ -37,11 +19,13 @@ export function GamePage(): React.JSX.Element {
   const [selectedQuestion, setSelectedQuestion] = useState<IQuestion | null>(null);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const [answer, setAnswer] = useState('');
+
   const handleOpen = (question: IQuestion): void => {
     setSelectedQuestion(question);
     setOpen(true);
     setTimer(60);
   };
+
   const handleClose = (): void => {
     setOpen(false);
     setSelectedQuestion(null);
@@ -60,19 +44,14 @@ export function GamePage(): React.JSX.Element {
     setOpenEnd(false);
   };
 
+
   const handleAnswerChange = (event: React.FormEvent<HTMLFormElement>):void => {
     setAnswer(event.target.value);
-  };
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>, question?: IQuestion): void => {
+  const submitHandler = (e: React.FormEvent, question?: IQuestion): void => {
     e.preventDefault();
-    if (
-      question &&
-      question.answer &&
-      answer.trim().toLowerCase() === question.answer.trim().toLowerCase()
-    ) {
+    if (question && question.answer && answer.trim().toLowerCase() === question.answer.trim().toLowerCase()) {
       dispatch(incrementScore(question));
-      console.log('Правильный ответ');
       setShow('show');
       setTimeout(() => {
         setShow(null);
@@ -80,8 +59,6 @@ export function GamePage(): React.JSX.Element {
       }, 1500);
     } else {
       dispatch(decrementScore(question));
-      // console.log(question)
-      console.log('Неправильный ответ');
       setShow('noShow');
       setTimeout(() => {
         setShow(null);
@@ -89,6 +66,7 @@ export function GamePage(): React.JSX.Element {
       }, 3000);
     }
   };
+
   useEffect(() => {
     if (open && selectedQuestion) {
       const id = setInterval(() => {
@@ -100,7 +78,6 @@ export function GamePage(): React.JSX.Element {
             setIntervalId(null);
             handleClose();
             dispatch(decrementScore(selectedQuestion));
-            console.log('Время вышло');
             return 0;
           }
         });
@@ -123,7 +100,6 @@ export function GamePage(): React.JSX.Element {
     );
     if (themes.length > 0 && allQuestionsSolved) {
       dispatch(addStatOfUserThunk(score)).then(() => {
-        console.log('Конец игры');
         dispatch(loadAllThemesThunk());
         setNum(score);
         dispatch(resetScore());
@@ -133,6 +109,7 @@ export function GamePage(): React.JSX.Element {
   }, [themes]);
 
   return (
+
     <>
           <Modal
         open={openEnd}
@@ -152,7 +129,10 @@ export function GamePage(): React.JSX.Element {
             </Button>
         </Box>
       </Modal>
-      <Modal
+      
+      
+      
+<!--       <Modal
         open={open}
         // onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -185,8 +165,9 @@ export function GamePage(): React.JSX.Element {
             </Typography>
           </Box>
         </Box>
-      </Modal>
-      <Box
+      </Modal> -->
+      
+<!--       <Box
         style={{ color: 'white', backgroundColor: 'rgba(0, 0, 0, 0.699', marginTop: '50px' }}
         component="section"
         sx={{ p: 2, borderBottom: '1px solid white' }}
@@ -225,7 +206,65 @@ export function GamePage(): React.JSX.Element {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
-    </>
+      </TableContainer> -->
+
+
+    <div className="game-container">
+      {/* Score display */}
+      <div className="game-score">
+        Ваш счет: <span className="score-value">{score}</span>
+      </div>
+
+      {/* Game board */}
+      <div className="game-board">
+        {themes.map((theme) => (
+          <div key={theme.id} className="theme-row">
+            <div className="theme-title">{theme.title}</div>
+            <div className="questions-container">
+              {theme.Questions.toSorted((a, b) => a.point - b.point).map((question) => (
+                <button
+                  key={question.id}
+                  className={`question-button ${question.isSolved ? 'solved' : ''}`}
+                  onClick={() => !question.isSolved && handleOpen(question)}
+                >
+                  {question.point}
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Modal for questions */}
+      {open && selectedQuestion && (
+        <div className="modal-overlay">
+          <div className="modal-container">
+            <div className="modal-header">
+              <h3 className="modal-question">{selectedQuestion.question}</h3>
+              <div className="modal-timer">Время на исходе-{timer} сек</div>
+            </div>
+            
+            <form onSubmit={(e) => submitHandler(e, selectedQuestion)} className="modal-form">
+              <input
+                type="text"
+                className="modal-input"
+                value={answer}
+                onChange={handleAnswerChange}
+                placeholder="Ваш ответ"
+                autoFocus
+              />
+              <button type="submit" className="modal-submit">Ответить</button>
+            </form>
+
+            {show && (
+              <div className={`modal-feedback ${show === 'show' ? 'correct' : 'incorrect'}`}>
+                {show === 'show' ? 'ВЕРНО!' : `МИМО! Верный ответ: ${selectedQuestion?.answer}`}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+</>
   );
 }
