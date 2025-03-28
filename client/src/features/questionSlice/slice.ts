@@ -1,17 +1,15 @@
-import { IQuestion } from '@/entities/question/model';
+import { ITheme } from '@/entities/question/model';
 import { createSlice } from '@reduxjs/toolkit';
 import { loadAllThemesThunk } from './thunk';
 
 export type QuestionState = {
-  themes: IQuestion[];
+  themes: ITheme[];
   score: number;
-  // isLoadingBooks: boolean;
 };
 
 const initialState: QuestionState = {
   themes: [],
   score: 0,
-  // isLoadingBooks: false,
 };
 
 export const questionSlice = createSlice({
@@ -56,7 +54,6 @@ export const questionSlice = createSlice({
     builder
       .addCase(loadAllThemesThunk.fulfilled, (state, action) => {
         state.themes = action.payload;
-        // state.isLoadingBooks = false;
       });
   },
 });

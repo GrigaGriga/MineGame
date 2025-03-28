@@ -61,7 +61,7 @@ export default function LKPage(): React.JSX.Element {
                 </tr>
               </thead>
               <tbody>
-                {games.map(game => (
+                {games?.map(game => (
                   <tr key={game.id}>
                     <td>{game.createdAt.split('T')[0]}</td>
                     <td>{game.points}</td>

@@ -21,7 +21,7 @@ export default function RouterProvider(): React.JSX.Element {
           element={
             <ProtecteRouter
               isAllowed={status === AuthStatus.AUTHORIZED}
-              redirectTo={CLIENT_ROUTES.LOGIN}
+              redirect={CLIENT_ROUTES.LOGIN}
             />
           }
         >
@@ -33,7 +33,7 @@ export default function RouterProvider(): React.JSX.Element {
           element={
             <ProtecteRouter
               isAllowed={status !== AuthStatus.AUTHORIZED}
-              redirectTo={CLIENT_ROUTES.MAIN}
+              redirect={CLIENT_ROUTES.MAIN}
             />
           }
         >

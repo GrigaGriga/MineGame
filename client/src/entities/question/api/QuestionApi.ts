@@ -1,12 +1,12 @@
 import type { AxiosInstance, AxiosResponse } from "axios";
-import { IQuestion} from "../model";
+import { ITheme} from "../model";
 import { axiosInstance } from "@/shared/lib/axiosInstance";
 
 class QuestionService {
   constructor(private readonly client: AxiosInstance) {}
 
-  async getThemes(): Promise<IQuestion[]> {
-    const { data } = await this.client<IQuestion[]>("/questions/themes");
+  async getThemes(): Promise<ITheme[]> {
+    const { data } = await this.client<ITheme[]>("/questions/themes");
     return data;
   }
 

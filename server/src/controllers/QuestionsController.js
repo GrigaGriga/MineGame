@@ -1,6 +1,4 @@
 const QuestionsService = require('../services/QuestionsServices');
-// const fs = require('fs').promises;
-// const path = require('path');
 
 class QuestionsController {
   static async getAllQuestions(req, res) {

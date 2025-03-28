@@ -1,5 +1,4 @@
 const { Question, Theme } = require('../../db/models');
-const path = require('path');
 
 class QuestionsService {
 

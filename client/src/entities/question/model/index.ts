@@ -7,6 +7,7 @@ export interface IQuestion {
   themeId: number;
   createdAt: Date;
   updatedAt: Date;
+  // Themes: ITheme[]
 }
 
 export interface ITheme {
@@ -14,4 +15,5 @@ export interface ITheme {
   title: string;
   createdAt: Date;
   updatedAt: Date;
+  Questions: IQuestion[]
 }

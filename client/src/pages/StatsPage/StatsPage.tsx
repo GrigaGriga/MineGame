@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { loadStatThunk } from '../../features/statSlice/thunk';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/reduxHooks';
 import './StatsPageStyles.css';
-import trophyImage from '@/shared/assets/trophy.png'; // Путь к вашему изображению кубка
+
 
 export default function StatsPage(): React.JSX.Element {
   const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ export default function StatsPage(): React.JSX.Element {
     }))
   );
 
-  const handleDownload = (e) => {
+  const handleDownload = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     window.location.href = `http://localhost:3000/api/stats/download`;
   };
@@ -45,7 +45,7 @@ export default function StatsPage(): React.JSX.Element {
             </tr>
           </thead>
           <tbody>
-            {sortedStats.map(({ id, name, points }, index) => (
+            {sortedStats?.map(({ id, name, points }) => (
               <tr key={id}>
                 <td>
                   {/* {index === 0 && '🏆 '} */}

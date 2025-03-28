@@ -1,10 +1,10 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { IStat } from "../../entities/stat/model";
+import { IStat, IUserWithStats } from "../../entities/stat/model";
 import { loadStatThunk } from "./thunk";
 
 export type StatStatse = {
-    stat: IStat[];
+    stat: IUserWithStats[];
     isLoading: boolean;
     error: string;
 };
@@ -25,10 +25,9 @@ export const statSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(loadStatThunk.pending, (state) => {
-                
                 state.isLoading = true;
             })
-            .addCase(loadStatThunk.fulfilled, (state, action: PayloadAction<IStat[]>) => {
+            .addCase(loadStatThunk.fulfilled, (state, action: PayloadAction<IUserWithStats[]>) => {
                 state.isLoading = false;
                 state.stat = action.payload;
             })

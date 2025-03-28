@@ -1,5 +1,4 @@
 const { User, Stat } = require('../../db/models');
-const path = require('path');
 
 class StatService {
 

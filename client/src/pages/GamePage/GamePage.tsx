@@ -13,7 +13,7 @@ export function GamePage(): React.JSX.Element {
   const [num, setNum] = useState(0);
   const [open, setOpen] = useState(false);
   const [openEnd, setOpenEnd] = useState(false);
-  const [show, setShow] = useState(null);
+  const [show, setShow] = useState<string | null>(null);
   const [timer, setTimer] = useState(60);
   const [selectedQuestion, setSelectedQuestion] = useState<IQuestion | null>(null);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
@@ -43,7 +43,7 @@ export function GamePage(): React.JSX.Element {
     setOpenEnd(false);
   };
 
-  const handleAnswerChange = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleAnswerChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setAnswer(event.target.value);
   };
 
@@ -137,11 +137,11 @@ export function GamePage(): React.JSX.Element {
 
         {/* Game board */}
         <div className="game-board">
-          {themes.map((theme) => (
+          {themes?.map((theme) => (
             <div key={theme.id} className="theme-row">
-              <div className="theme-title">{theme.title}</div>
+              <div className="theme-title">{theme?.title}</div>
               <div className="questions-container">
-                {theme.Questions.toSorted((a, b) => a.point - b.point).map((question) => (
+                {theme?.Questions?.toSorted((a, b) => a.point - b.point)?.map((question) => (
                   <button
                     key={question.id}
                     className={`question-button ${question.isSolved ? 'solved' : ''}`}
