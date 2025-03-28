@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import questionReducer from '../features/questionSlice/slice';
 import authReducer from '../features/auth/lib/authSlice';
+import statsReducer from '../features/statSlice/slice';
 
 export const store = configureStore({
   reducer: {
+    stats: statsReducer,
     questions: questionReducer,
     auth: authReducer,
   },
