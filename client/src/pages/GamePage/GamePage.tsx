@@ -59,14 +59,14 @@ export function GamePage(): React.JSX.Element {
       setTimeout(() => {
         setShow(null);
         handleClose();
-      }, 1500);
+      }, 1000);
     } else {
       dispatch(decrementScore(question));
       setShow('noShow');
       setTimeout(() => {
         setShow(null);
         handleClose();
-      }, 3000);
+      }, 2000);
     }
   };
 
