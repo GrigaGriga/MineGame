@@ -47,16 +47,16 @@ module.exports = {
       'Questions',
       [
         // Тема 1: Люди Икс (themeId: 1)
-      { question: 'Как зовут лидера Людей Икс?', answer: 'ПрофессорX', point: 200, isSolved: false, themeId: 1 },
+      { question: 'Как зовут лидера Людей Икс?', answer: 'Чарльз Ксавьер', point: 200, isSolved: false, themeId: 1 },
       { question: 'Какой металл может нейтрализовать способности мутантов?', answer: 'Адамантий', point: 400, isSolved: false, themeId: 1 },
       { question: 'Какое настоящее имя Росомахи?', answer: 'Логан', point: 600, isSolved: false, themeId: 1 },
       { question: 'Кто создал Страйкера для охоты на мутантов?', answer: 'Церковь', point: 800, isSolved: false, themeId: 1 },
-      { question: 'Какой ген отвечает за мутации в ДНК Людей Икс?', answer: 'ГенX', point: 1000, isSolved: false, themeId: 1 },
+      { question: 'Какой ген отвечает за мутации в ДНК Людей Икс?', answer: 'X', point: 1000, isSolved: false, themeId: 1 },
 
       // Тема 2: Сериал Друзья (themeId: 2)
       { question: 'Как зовут персонажа с прической "афро"?', answer: 'Моника', point: 200, isSolved: false, themeId: 2 },
-      { question: 'Какой актер играет Чендлера?', answer: 'Перри', point: 400, isSolved: false, themeId: 2 },
-      { question: 'Как называется кофешка, где работала Рэйчел?', answer: 'ЦентралПёрк', point: 600, isSolved: false, themeId: 2 },
+      { question: 'Какой актер играет Чендлера?', answer: 'Мэттью Перри', point: 400, isSolved: false, themeId: 2 },
+      { question: 'Как называется кафешка, где работала Рэйчел?', answer: 'ЦентралПёрк', point: 600, isSolved: false, themeId: 2 },
       { question: 'Кто произносит фразу "How you doin?"?', answer: 'Джоуи', point: 800, isSolved: false, themeId: 2 },
       { question: 'Какой номер квартиры у Моники и Рэйчел?', answer: '20', point: 1000, isSolved: false, themeId: 2 },
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './LKstyles.css';
 import { axiosInstance } from '@/shared/lib/axiosInstance';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/reduxHooks';
 
 interface Game {
   id: number;
@@ -9,11 +10,11 @@ interface Game {
 }
 
 export default function LKPage(): React.JSX.Element {
-  const [user, setUser] = useState({
-    name: 'Игрок (можно достать имя из стэйта)',
-    photo: ''
-  });
+  const user = useAppSelector((store) => store.auth.user);
+  const dispatch = useAppDispatch();
+  const [photo, setPhoto] = useState('');
   const [games, setGames] = useState<Game[]>([]);
+
 
   // Рандомное фото пользователя
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function LKPage(): React.JSX.Element {
       '/public/avatars/55.jpg',
     ];
     const randomPhoto = photos[Math.floor(Math.random() * photos.length)];
-    setUser(prev => ({...prev, photo: randomPhoto}));
+    setPhoto(randomPhoto);
   }, []);
 
   useEffect(() => {
@@ -44,9 +45,9 @@ export default function LKPage(): React.JSX.Element {
       
       <div className="lk-profile">
         <div className="avatar-frame">
-          <img src={user.photo} alt="Аватар" className="avatar" />
+          <img src={photo} alt="Аватар" className="avatar" />
         </div>
-        <h2 className="username">{user.name}</h2>
+        <h2 className="username">{user?.name}</h2>
       </div>
 
       <div className="lk-games">
@@ -61,7 +62,7 @@ export default function LKPage(): React.JSX.Element {
                 </tr>
               </thead>
               <tbody>
-                {games.map(game => (
+                {games.toSorted((a, b) => b.points - a.points).map(game => (
                   <tr key={game.id}>
                     <td>{game.createdAt.split('T')[0]}</td>
                     <td>{game.points}</td>
