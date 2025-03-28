@@ -14,6 +14,19 @@ class StatService {
       },
     });
   }
+
+    static async addStat(score, userId) {
+    try {
+      const newStat = await Stat.create({
+        userId,
+        points: score,
+      });
+      return newStat;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 }
 
 module.exports = StatService;

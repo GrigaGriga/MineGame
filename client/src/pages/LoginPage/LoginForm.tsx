@@ -3,10 +3,8 @@ import { Box, Button, TextField } from '@mui/material';
 import type { IUserLoginData } from '@/entities/user/model';
 import { useNavigate } from 'react-router';
 import { useAppDispatch } from '@/shared/lib/reduxHooks';
-import {
-  loadAllQuestionsThunk
-} from '../../features/questionSlice/thunk';
 import { loginThunk } from '@/features/auth/lib/thunks';
+import { loadAllThemesThunk } from '@/features/questionSlice/thunk';
 
 export default function LoginForm(): React.JSX.Element {
   const navigate = useNavigate();
@@ -19,7 +17,7 @@ export default function LoginForm(): React.JSX.Element {
       password: formData.get('password') as string,
     };
     dispatch(loginThunk(data)).then(() => {
-          dispatch(loadAllQuestionsThunk())
+          dispatch(loadAllThemesThunk())
 
       navigate('/');
     });

@@ -1,15 +1,16 @@
 const statsRouter = require('express').Router();
 const checkId = require('../middlewares/checkId');
-const { verifyRefreshToken } = require('../middlewares/verifyTokens');
+const { verifyRefreshToken, verifyAccessToken } = require('../middlewares/verifyTokens');
 const StatsController = require('../controllers/StatsController');
 // const upload = require('../middlewares/multer');
 
 statsRouter.route('/allusers').get(StatsController.getAllUsers)
 statsRouter.route('/usergames').get(verifyRefreshToken, StatsController.getAllUserGames)
+statsRouter.route('/addStat').post(verifyAccessToken, StatsController.createStat);
 
 // booksRouter.route('/:id/book').get(checkId, BooksController.getOne)
 // booksRouter.route('/:id/book/comment').post(checkId, verifyAccessToken, BooksController.commentBook)
-// booksRouter.route('/addbook').post(verifyAccessToken, upload.single('file'), BooksController.createBook);
+
 // booksRouter.route('/:id/edit').put(checkId, verifyAccessToken, BooksController.editBook);
 // booksRouter.route('/:id/delete').delete(checkId, verifyAccessToken, BooksController.deleteOne);
 // booksRouter.route('/:id/likeBook').post(checkId, verifyAccessToken, BooksController.likeBook);
