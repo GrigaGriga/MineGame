@@ -7,6 +7,8 @@ import { MainPage } from '@/pages/MainPage/MainPage';
 import { AddBookPage } from '@/pages/AddBookPage/AddBookPage';
 import { GamePage } from '@/pages/GamePage/GamePage';
 import StatsPage from '@/pages/StatsPage/StatsPage';
+import LKPage from '@/pages/LK/LKPage';
+
 
 export default function RouterProvider(): React.JSX.Element {
   return (
@@ -14,10 +16,10 @@ export default function RouterProvider(): React.JSX.Element {
       <Route element={<Layout />}>
         <Route path={CLIENT_ROUTES.MAIN} element={<MainPage />} />
         <Route path={CLIENT_ROUTES.GAME} element={<GamePage />} />
-        <Route path={CLIENT_ROUTES.ADDBOOK} element={<AddBookPage />} />
         <Route path={CLIENT_ROUTES.SIGN_UP} element={<SignUpPage />} />
         <Route path={CLIENT_ROUTES.LOGIN} element={<LoginPage />} />
         <Route path={CLIENT_ROUTES.STATS} element={<StatsPage />} />
+        <Route path={CLIENT_ROUTES.LK} element={<LKPage />} />
         <Route path={CLIENT_ROUTES.NOT_FOUND} element={<h1>No content</h1>} />
       </Route>
     </Routes>

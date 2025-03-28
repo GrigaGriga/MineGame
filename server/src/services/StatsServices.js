@@ -1,0 +1,32 @@
+const { Stat } = require('../../db/models');
+const path = require('path');
+
+class StatService {
+
+  static getAllUsers() {
+    return Stat.findAll();
+  }
+
+  static getAllUserGames(userId) {
+    return Stat.findAll({
+      where: {
+        userId
+      },
+    });
+  }
+
+    static async addStat(score, userId) {
+    try {
+      const newStat = await Stat.create({
+        userId,
+        points: score,
+      });
+      return newStat;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+}
+
+module.exports = StatService;

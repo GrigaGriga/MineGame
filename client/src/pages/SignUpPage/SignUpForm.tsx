@@ -1,53 +1,80 @@
-import React from "react";
-import { Box, Button, TextField } from "@mui/material";
-import { useNavigate } from "react-router";
-import { IUserSignUpData } from "@/entities/user/model";
-import { signupThunk } from "@/features/auth/lib/thunks";
-import { useAppDispatch } from "@/shared/lib/reduxHooks";
-import { loadAllBooksThunk, loadFavouriteBooksThunk, loadUserBooksThunk } from "@/features/bookSlice/thunk";
+import React from 'react';
+import { useNavigate } from 'react-router';
+import { IUserSignUpData } from '@/entities/user/model';
+import { signupThunk } from '@/features/auth/lib/thunks';
+import { useAppDispatch } from '@/shared/lib/reduxHooks';
+import './SignUpFormStyles.css';
+import { loadAllThemesThunk } from '@/features/questionSlice/thunk';
+
 
 export default function SignUpForm(): React.JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const data: IUserSignUpData = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
     };
-    void dispatch(signupThunk(data)).then(()=>{
-      dispatch(loadAllBooksThunk())
-      dispatch(loadUserBooksThunk());
-      dispatch(loadFavouriteBooksThunk());
-      navigate("/");
-    })
+    void dispatch(signupThunk(data)).then(() => {
+
+
+
+    dispatch(loadAllThemesThunk());
+
+      navigate('/');
+    });
   };
+
   return (
-    <Box
-      component="form"
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="space-around"
-      py={5}
-      onSubmit={submitHandler}
-    >
-      <TextField variant="outlined" name="name" label="Name" />
-      <br />
-      <TextField variant="outlined" name="email" label="Email" type="email" />
-      <br />
-      <TextField
-        variant="outlined"
-        name="password"
-        label="Password"
-        type="password"
-      />
-      <br />
-      <Button variant="outlined" type="submit">
-        Sign Up
-      </Button>
-    </Box>
+    <div className="auth-container">
+      <form className="auth-form" onSubmit={submitHandler}>
+        {/* Neon border elements */}
+        <div className="neon-border-bottom"></div>
+        <div className="neon-border-left"></div>
+        
+        <h1 className="auth-title">Регистрация</h1>
+        
+        <div className="input-group">
+          <input 
+            type="text" 
+            name="name" 
+            placeholder="Имя" 
+            className="form-input"
+            required
+          />
+          <div className="input-underline"></div>
+        </div>
+        
+        <div className="input-group">
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="Email" 
+            className="form-input"
+            required
+          />
+          <div className="input-underline"></div>
+        </div>
+        
+        <div className="input-group">
+          <input 
+            type="password" 
+            name="password" 
+            placeholder="Пароль" 
+            className="form-input"
+            required
+          />
+          <div className="input-underline"></div>
+        </div>
+        
+        <button type="submit" className="auth-button">
+          Зарегистрироваться
+        </button>
+      </form>
+    </div>
   );
 }
