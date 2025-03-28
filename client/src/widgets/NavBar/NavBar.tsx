@@ -27,19 +27,19 @@ export default function NavBar(): React.JSX.Element {
 
         <div className="navbar-links">
           <NavLink to={CLIENT_ROUTES.MAIN} className="nav-link">
-            Main
+            ГЛАВНАЯ
           </NavLink>
           
           {user && (
             <>
               <NavLink to={CLIENT_ROUTES.GAME} className="nav-link">
-                Game
+                ИГРА
               </NavLink>
               <NavLink to={CLIENT_ROUTES.LK} className="nav-link">
-                Profile
+                МОЙ ПРОФИЛЬ
               </NavLink>
               <NavLink to={CLIENT_ROUTES.STATS} className="nav-link">
-                Stats
+                СТАТИСТИКА
               </NavLink>
             </>
           )}
@@ -49,16 +49,16 @@ export default function NavBar(): React.JSX.Element {
           {!user && (
             <>
               <NavLink to={CLIENT_ROUTES.SIGN_UP} className="nav-link">
-                SignUp
+                ЗАРЕГИСТРИРОВАТЬСЯ
               </NavLink>
               <NavLink to={CLIENT_ROUTES.LOGIN} className="nav-link">
-                Login
+                ВОЙТИ
               </NavLink>
             </>
           )}
           {user && (
             <button onClick={logoutHandler} className="logout-button">
-              Logout
+              ВЫЙТИ
             </button>
           )}
         </div>
