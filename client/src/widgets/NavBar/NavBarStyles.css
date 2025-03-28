@@ -26,12 +26,13 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 30%;
-    height: 2px;
+    width: 40%;
+    height: 1px;
     background: linear-gradient(90deg, transparent, #00e1ff, #00e1ff, transparent);
-    animation: neonLine 6s linear infinite;
+    animation: neonLine 1.2s linear infinite;
     box-shadow: 0 0 10px #00e1ff;
     opacity: 0.8;
+    padding-top: -17px;
   }
   
   @keyframes neonLine {

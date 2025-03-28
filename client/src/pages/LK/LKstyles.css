@@ -6,25 +6,26 @@
   color: white;
   font-family: 'Segoe UI', sans-serif;
   background-color: rgba(10, 10, 20, 0.8);
-  min-height: 100vh;
+  height: 90vh;
   position: relative;
   overflow: hidden;
 }
 
 /* Neon border animation */
-.lk-container::before {
+/* .lk-container::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 1px;
   background: linear-gradient(90deg, transparent, #00e1ff, #00e1ff, transparent);
-  animation: neonLine 6s linear infinite;
+  animation: neonLine 1s linear infinite;
   box-shadow: 0 0 10px #00e1ff;
   opacity: 0.8;
   z-index: 1;
-}
+ 
+} */
 
 @keyframes neonLine {
   0% { transform: translateX(-100%); opacity: 0; }
