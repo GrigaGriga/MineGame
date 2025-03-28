@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { loadStatThunk } from '../../features/statSlice/thunk';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/reduxHooks';
+import './StatsPageStyles.css';
+import trophyImage from '@/shared/assets/trophy.png'; // Путь к вашему изображению кубка
 
 export default function StatsPage(): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const users = useAppSelector((state) => state.stats.stat); // теперь stat — это список пользователей
+  const users = useAppSelector((state) => state.stats.stat);
 
   useEffect(() => {
     dispatch(loadStatThunk());
   }, [dispatch]);
-
 
   const flattenedStats = users.flatMap((user) =>
     user.Stats.map((stat) => ({
@@ -19,31 +20,40 @@ export default function StatsPage(): React.JSX.Element {
     }))
   );
 
-  console.log(users)
-
-  // Сортировка по убыванию points
   const sortedStats = [...flattenedStats].sort((a, b) => b.points - a.points);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Stats Page</h2>
-
-      <table border={1} cellPadding={10} cellSpacing={0} style={{ borderCollapse: 'collapse', marginTop: '20px' }}>
-        <thead>
-          <tr>
-            <th>User Name</th>
-            <th>Points (↓)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedStats.map(({ id, name, points }) => (
-            <tr key={id}>
-              <td>{name}</td>
-              <td>{points}</td>
+    <div className="stats-container">
+      <h1 className="stats-header">МАГИСТРЫ</h1>
+      
+      <div className="trophy-section">
+        <img src="./kybok.png" alt="Champion Trophy" className="trophy-image" />
+        <div className="trophy-glow"></div>
+      </div>
+      
+      <div className="stats-scroll-container">
+        <table className="stats-table">
+          <thead>
+            <tr>
+              <th>ИГРОК</th>
+              <th>ОЧКИ</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sortedStats.map(({ id, name, points }, index) => (
+              <tr key={id}>
+                <td>
+                  {/* {index === 0 && '🏆 '} */}
+                  {/* {index === 1 && '🥈 '}
+                  {index === 2 && '🥉 '} */}
+                  {name}
+                </td>
+                <td>{points.toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
