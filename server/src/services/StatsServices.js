@@ -1,4 +1,4 @@
-const { Stat } = require('../../db/models');
+const { User, Stat } = require('../../db/models');
 const path = require('path');
 
 class StatService {
@@ -29,6 +29,10 @@ class StatService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  static getUser(id) {
+    return User.findByPk(id);
   }
 
 }
