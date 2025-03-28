@@ -1,10 +1,12 @@
 const express = require('express');
-const { User} = require('../../db/models');
+const { User, Stat} = require('../../db/models');
 const bcrypt = require('bcrypt');
 const generateTokens = require('../utils/generateTokens');
 const cookieConfig = require('../configs/cookie.config');
 
 const authRouter = express.Router();
+
+
 
 authRouter.route('/signup').post(async (req, res) => {
   try {
@@ -71,5 +73,28 @@ authRouter.post('/login', async (req, res) => {
 authRouter.get('/logout', (req, res) => {
   res.clearCookie('refreshToken').sendStatus(200);
 });
+
+authRouter.get('/userall', async (req, res) => {
+  try {
+    const { name, point } = req.query;
+
+    const users = await User.findAll({
+      where: name , // фильтр по имени, если передан
+      include: [
+        {
+          model: Stat,
+          where: point , // фильтр по points, если передан
+          // required: true, // только те, у кого есть статистика
+        }
+      ]
+    });
+
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Ошибка при получении пользователей' });
+  }
+});
+
 
 module.exports = authRouter;

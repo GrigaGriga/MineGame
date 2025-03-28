@@ -7,5 +7,4 @@ export enum CLIENT_ROUTES {
   NOT_FOUND = "*",
   USER = "/user",
   STATS = "/stats",
-  GAME = "/game"
 }
