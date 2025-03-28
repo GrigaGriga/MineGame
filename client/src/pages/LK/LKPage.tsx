@@ -14,7 +14,6 @@ export default function LKPage(): React.JSX.Element {
     photo: ''
   });
   const [games, setGames] = useState<Game[]>([]);
-console.log(games);
 
   // Рандомное фото пользователя
   useEffect(() => {
@@ -29,13 +28,12 @@ console.log(games);
     setUser(prev => ({...prev, photo: randomPhoto}));
   }, []);
 
-
   useEffect(() => {
     const userGames = async () => {
-      const response = await axiosInstance.get('/stats/usergames')
-      setGames(response.data)
-    }
-    userGames()
+      const response = await axiosInstance.get('/stats/usergames');
+      setGames(response.data);
+    };
+    userGames();
   }, []);
 
   return (
@@ -53,26 +51,28 @@ console.log(games);
 
       <div className="lk-games">
         <h3>Мои игры:</h3>
-        {games.length > 0 ? (
-          <table className="games-table">
-            <thead>
-              <tr>
-                <th>Дата</th>
-                <th>Счет</th>
-              </tr>
-            </thead>
-            <tbody>
-              {games.map(game => (
-                <tr key={game.id}>
-                  <td>{game.createdAt.split('T')[0]}</td>
-                  <td>{game.points}</td>
+        <div className="games-scroll-container">
+          {games.length > 0 ? (
+            <table className="games-table">
+              <thead>
+                <tr>
+                  <th>Дата</th>
+                  <th>Счет</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>У вас пока нет сыгранных игр</p>
-        )}
+              </thead>
+              <tbody>
+                {games.map(game => (
+                  <tr key={game.id}>
+                    <td>{game.createdAt.split('T')[0]}</td>
+                    <td>{game.points}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p className="no-games-message">У вас пока нет сыгранных игр</p>
+          )}
+        </div>
       </div>
     </div>
   );
