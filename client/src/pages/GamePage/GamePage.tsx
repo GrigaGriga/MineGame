@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { IQuestion } from '@/entities/question/model';
-import { decrementScore, incrementScore } from '@/features/questionSlice/slice';
+import { decrementScore, incrementScore, resetScore } from '@/features/questionSlice/slice';
 import { addStatOfUserThunk, loadAllThemesThunk } from '@/features/questionSlice/thunk';
 
 const style = {
@@ -25,14 +25,11 @@ const style = {
 
 export function GamePage(): React.JSX.Element {
   const themes = useAppSelector((state) => state.questions.themes);
-  // if (themes.map((theme) => theme.Questions.map(question=>question.isSolved))){
-  //   console.log('End Game');
-  // }
-  // console.log(themes);
   const score = useAppSelector((state) => state.questions.score);
   const dispatch = useAppDispatch();
 
   const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(null);
   const [timer, setTimer] = useState(60);
   const [selectedQuestion, setSelectedQuestion] = useState<IQuestion | null>(null);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
@@ -53,11 +50,11 @@ export function GamePage(): React.JSX.Element {
     }
   };
 
-  const handleAnswerChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleAnswerChange = (event: React.FormEvent<HTMLFormElement>) => {
     setAnswer(event.target.value);
   };
 
-  const submitHandler = (e: FormEvent, question?: IQuestion): void => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>, question?: IQuestion): void => {
     e.preventDefault();
     if (
       question &&
@@ -65,12 +62,21 @@ export function GamePage(): React.JSX.Element {
       answer.trim().toLowerCase() === question.answer.trim().toLowerCase()
     ) {
       dispatch(incrementScore(question));
-      console.log(' ответ');
-      handleClose();
+      console.log('Правильный ответ');
+      setShow('show');
+      setTimeout(() => {
+        setShow(null);
+        handleClose();
+      }, 2000);
     } else {
       dispatch(decrementScore(question));
+      // console.log(question)
       console.log('Неправильный ответ');
-      handleClose();
+      setShow('noShow');
+      setTimeout(() => {
+        setShow(null);
+        handleClose();
+      }, 2000);
     }
   };
   useEffect(() => {
@@ -83,6 +89,8 @@ export function GamePage(): React.JSX.Element {
             clearInterval(id);
             setIntervalId(null);
             handleClose();
+            dispatch(decrementScore(selectedQuestion));
+            console.log('Время вышло');
             return 0;
           }
         });
@@ -92,7 +100,7 @@ export function GamePage(): React.JSX.Element {
       clearInterval(intervalId);
       setIntervalId(null);
     }
-    return () => {
+    return (): void => {
       if (intervalId) {
         clearInterval(intervalId);
       }
@@ -101,15 +109,16 @@ export function GamePage(): React.JSX.Element {
 
   useEffect(() => {
     const allQuestionsSolved = themes.every((theme) =>
-        theme.Questions.every((question) => question.isSolved)
+      theme.Questions.every((question) => question.isSolved),
     );
-    if (themes.length>0 && allQuestionsSolved) {
+    if (themes.length > 0 && allQuestionsSolved) {
       dispatch(addStatOfUserThunk(score)).then(() => {
         console.log('Конец игры');
         dispatch(loadAllThemesThunk());
-      })
+        dispatch(resetScore());
+      });
     }
-}, [themes]);
+  }, [themes]);
 
   return (
     <>
@@ -123,9 +132,9 @@ export function GamePage(): React.JSX.Element {
           <Typography style={{ color: 'black' }} id="modal-modal-title" variant="h6" component="h2">
             {selectedQuestion?.question}
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {/* <div style={{color:'black'}}>{selectedQuestion?.point}</div> */}
-            {/* <div style={{color:'black'}}>Время-{timer}</div> */}
+          <Typography style={{ color: 'black' }} id="modal-modal-description" sx={{ mt: 2 }}>
+            {/* {selectedQuestion?.point} */}
+            Время на исходе-{timer}
           </Typography>
           <Box component="form" onSubmit={(e) => submitHandler(e, selectedQuestion)}>
             <TextField
@@ -140,6 +149,10 @@ export function GamePage(): React.JSX.Element {
             <Button variant="outlined" type="submit">
               Ответить
             </Button>
+            <Typography style={{ color: 'black' }} id="modal-modal-description" sx={{ mt: 2 }}>
+              {show === 'show' && 'ВЕРНО!'}
+              {show === 'noShow' && 'МИМО!'}
+            </Typography>
           </Box>
         </Box>
       </Modal>
@@ -163,14 +176,18 @@ export function GamePage(): React.JSX.Element {
                 </TableCell>
                 {theme.Questions.toSorted((a, b) => a.point - b.point).map((question) => (
                   <TableCell key={question.id} align="right">
-                    <Button style={{
-        ...(question.isSolved && {
-            pointerEvents: 'none',
-            opacity: 0.3,
-            cursor: 'default',
-        }),
-    }} onClick={() => handleOpen(question)}>{question.point}</Button>
-                    
+                    <Button
+                      style={{
+                        ...(question.isSolved && {
+                          pointerEvents: 'none',
+                          opacity: 0.3,
+                          cursor: 'default',
+                        }),
+                      }}
+                      onClick={() => handleOpen(question)}
+                    >
+                      {question.point}
+                    </Button>
                   </TableCell>
                 ))}
               </TableRow>

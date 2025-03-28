@@ -46,6 +46,11 @@ export const questionSlice = createSlice({
         return theme;
       });
     },
+
+    resetScore: (state) => {
+      state.score = 0
+    },
+
   },
   extraReducers: (builder) => {
     builder
@@ -57,6 +62,6 @@ export const questionSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementScore, decrementScore } = questionSlice.actions;
+export const { incrementScore, decrementScore, resetScore } = questionSlice.actions;
 
 export default questionSlice.reducer;

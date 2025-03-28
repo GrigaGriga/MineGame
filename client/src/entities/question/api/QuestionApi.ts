@@ -11,7 +11,7 @@ class QuestionService {
   }
 
   async addStatOfUser(score: number): Promise<AxiosResponse> {
-    console.log(score)
+    // console.log(score)
     const { data } = await this.client.post("/stats/addStat", {score});
     return data;
   }
